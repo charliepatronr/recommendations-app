@@ -19,3 +19,5 @@ student = Student.find_by(name: student_name)
 # student = Student.find(student_name)
 p student
 
+
+Student.login("JoAnna Park")
