@@ -20,13 +20,38 @@ class Student < ActiveRecord::Base
         #but recommendation still appears on this method
     end
 
-    # def edit_recommendation(name, artist)
-    #     song = Song.find_by(name: name, artist: artist)
-    #     song_id = song.id
-    #     recommendation = find_by(song_id: song_id)
-    #     puts 'Enter what you want to update: '
-    #     value_to_update = gets.chomp
-    # end
+    def edit_recommendation(name, artist)
+        song = Song.find_by(name: name, artist: artist)
+        song_id = song.id
+        puts <<~TEXT
+        "What would you like to update? "
+        "1. Song name"
+        "2. Artist name"
+        "3. Genre"
+        "4. Year"
+        TEXT
+        input = gets.chomp
+
+        case input 
+        when '1'
+            puts "Enter new song name"
+            replace = gets.chomp
+            Song.update(song_id, name: replace )
+        when '2'
+            puts "Enter new song artist"
+            replace = gets.chomp
+            Song.update(song_id, name: replace )
+        when '3'
+            puts "Enter new genre"
+            replace = gets.chomp
+            Song.update(song_id, name: replace )
+        when '4'
+            puts "Enter new year"
+            replace = gets.chomp
+            Song.update(song_id, name: replace )
+        end
+        
+    end
 
     def delete_recommendation(song_name, artist)
         song = Song.find_by(name: song_name, artist: artist)
