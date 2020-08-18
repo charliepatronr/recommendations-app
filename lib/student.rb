@@ -37,26 +37,24 @@ class Student < ActiveRecord::Base
         p 'Your recommendation has been deleted'
     end
 
-    def student_recommendations(student_name)
+    def self.student_recommendations(student_name)
         target = Student.find_by(name: student_name)
-        songs_ids = target.recommendations.select do |recommend|
+        songs_ids = target.recommendations.map do |recommend|
             recommend.song_id
         end 
-        song_ids.map do |id|
+        songs_array = songs_ids.map do |id|
             Song.find(id)
+        end
+        songs_array.each do |song|
+            puts "#{song.name} - #{song.artist}\n"
         end
     end
 
-    def self.login(name)
-        student = self.find_or_create_by(name: name)
-        p "Welcome #{student.name}!"
-    end
-
-    ## IAN 
-    # def login2 
-    #     user_name = gets.chomp
-    #     current_user = Student.find_by(name: user_name)
+    # def self.login(name)
+    #     student = self.find_or_create_by(name: name)
+    #     p "Welcome #{student.name}!"
     # end
+
 
     # STUDENT.SONGS shows songs 
     # RECOMMENDATION.SONG shows individual song related to that recommendation
