@@ -3,7 +3,7 @@ require_relative '../config/environment'
 puts "hello world"
 
 class CommandLineInterface
-    def greet
+    def edit_recommendation
         puts 'Welcome to Felp, the best resource for restaurant information in the world!'
     end
 end
@@ -21,3 +21,14 @@ p student
 
 
 Student.login("JoAnna Park")
+
+case input
+when "1"
+    puts 'Profile page'
+when '2'
+    puts 'Visits Page'
+when '3'
+    puts ''
+when '4'
+    puts 'Remove visit'
+end
