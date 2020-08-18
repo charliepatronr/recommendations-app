@@ -44,14 +44,31 @@ when '2'
    Song.playlist
 
 when '3'
-    puts ''
+    puts 'Edit'
 when '4'
-    puts 'Remove visit'
+    my_songs = $student.songs 
+    if my_songs.size >= 1
+
+   p my_songs
+
+   puts 'Enter the name of the song you would like to delete: '
+   song = gets.chomp
+
+   puts 'Enter the artist of the song you would like to delete: '
+   artist = gets.chomp
+
+   $student.delete_recommendation(song, artist)
+
+    else
+       p 'You have no song recommendations!!!'
+    end
+
+
 when '5'
     puts 'Enter student name: '
     name = gets.chomp
 
-    Student.student_recommendations(name)
+    p Student.student_recommendations(name)
 end
 
 end

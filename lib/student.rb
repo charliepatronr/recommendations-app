@@ -15,7 +15,7 @@ class Student < ActiveRecord::Base
     end
 
     def list_recommendations
-        self.recommendations
+        self.songs
         # after delete_recommendation method is called both song and recommendations are deleted
         #but recommendation still appears on this method
     end
