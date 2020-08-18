@@ -50,21 +50,8 @@ class Student < ActiveRecord::Base
         end
     end
 
-    # def self.login(name)
-    #     student = self.find_or_create_by(name: name)
-    #     p "Welcome #{student.name}!"
-    # end
-
 
     # STUDENT.SONGS shows songs 
     # RECOMMENDATION.SONG shows individual song related to that recommendation
-    <<~TEXT
-    chunk of text 
-    TEXT
-
 
 end
-
-#name  319
-#artist Blinker The Star
-
