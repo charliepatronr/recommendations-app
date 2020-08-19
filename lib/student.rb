@@ -75,6 +75,16 @@ class Student < ActiveRecord::Base
         end
     end
 
+    def view_songs_by_genre(song_genre)
+        array = Song.all.select do |song|
+            song.genre == song_genre
+        end
+        array.each do |song|
+            puts "#{song.name} - #{song.artist}\n"
+        end
+    end
+    ##need to list all genres first
+    ##allow user to choose from list (using TTYprompt)
 
     # STUDENT.SONGS shows songs 
     # RECOMMENDATION.SONG shows individual song related to that recommendation

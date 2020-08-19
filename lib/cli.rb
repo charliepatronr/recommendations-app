@@ -60,6 +60,7 @@ def menu
             else
                 p 'You have no song recommendations!!!'
             end
+            
             next_action
         when '4'
             my_songs = $student.songs 
@@ -77,6 +78,8 @@ def menu
         when '5'
             puts 'Enter student name: '
             name = gets.chomp
+
+            Student.student_recommendations(name)
             p Student.student_recommendations(name)
             next_action
         when "6"
