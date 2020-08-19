@@ -50,7 +50,7 @@ class Student < ActiveRecord::Base
             replace = gets.chomp
             Song.update(song_id, name: replace )
         end
-        
+
     end
 
     def delete_recommendation(song_name, artist)
@@ -64,7 +64,7 @@ class Student < ActiveRecord::Base
 
     def self.student_recommendations(student_name)
         target = Student.find_by(name: student_name)
-        songs_ids = target.recommendations.map do |recommend|
+            songs_ids = target.recommendations.map do |recommend|
             recommend.song_id
         end 
         songs_array = songs_ids.map do |id|
