@@ -1,5 +1,7 @@
 require_relative '../config/environment'
 ActiveRecord::Base.logger = nil
+$prompt = TTY::Prompt.new
+
 
 # Student.login("JoAnna Park")
 
@@ -18,33 +20,41 @@ end
 
     #Add view profile method
 
+    # prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
+# =>
+# Choose your destiny? (Use arrow keys, press Enter to select)
+# ‣ Scorpion
+#   Kano
+#   Jax
+
+# user_input = prompt.select("Select an action?", choices)
+# prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
 
 def main_menu
     sleep 2
-    puts <<~TEXT
-    Would you like to: 
-    1. View playlist
-    2. Edit playlist
-    3. Search
-    4. Exit
-    TEXT
-    input = gets.chomp
+    puts `clear`
+    input = $prompt.select("What would you like to do? ") do |menu|
+        menu.choice 'View playlist'
+        menu.choice 'Edit playlist'
+        menu.choice 'Search'
+        menu.choice 'Exit'
+    end
 
     case input 
-    when "1"
+    when "View playlist"
         sleep 2
         puts `clear`
         Song.playlist
         next_action
-    when "2"
+    when "Edit playlist"
         sleep 2
         puts `clear`
         edit_menu
-    when "3"
+    when "Search"
         sleep 2
         puts `clear`
         search_menu
-    when "4"
+    when "Exit"
         puts 'Thank you for using our App!'
     end 
 end
@@ -52,17 +62,15 @@ end
 def edit_menu
     sleep 2
     puts `clear`
-    puts <<~TEXT
-    Would you like to: 
-    1. Add a song to playlist
-    2. Edit your songs
-    3. Delete your songs
-    4. Return to main menu
-    TEXT
-    input = gets.chomp
+    input = $prompt.select("What would you like to do? ") do |menu|
+        menu.choice 'Add a song to playlist'
+        menu.choice 'Edit your songs'
+        menu.choice 'Delete your songs'
+        menu.choice 'Return to main menu'
+    end
     
     case input 
-    when "1"
+    when "Add a song to playlist"
         sleep 2
         puts `clear`
         puts 'Enter the name of the song you would like to recommend: '
@@ -75,7 +83,7 @@ def edit_menu
         year = gets.chomp.to_i
         $student.recommend_song(name, artist, genre, year)
         edit_menu
-    when "2"
+    when "Edit your songs"
         sleep 2
         puts `clear`
         my_songs = $student.songs 
@@ -90,7 +98,7 @@ def edit_menu
             p 'You have no song recommendations!!!'
         end
         edit_menu
-    when "3"
+    when "Delete your songs"
         puts `clear`
         sleep 2
         my_songs = $student.songs 
@@ -106,7 +114,7 @@ def edit_menu
         end
         edit_menu
 
-    when "4"
+    when "Return to main menu"
         main_menu
     end
 
@@ -115,16 +123,15 @@ end
 def search_menu
     sleep 2
     puts `clear`
-    puts <<~TEXT
-    Would you like to: 
-    1. View songs by Genre
-    2. Your friend's favorite decade
-    3. Your friend's recommendations
-    4. Return to main menu
-    TEXT
-    input = gets.chomp
+    input = $prompt.select("What would you like to do? ") do |menu|
+        menu.choice 'View songs by Genre'
+        menu.choice "Your friend's favorite decade"
+        menu.choice "Your friend's recommendations"
+        menu.choice 'Return to main menu'
+    end
+
     case input 
-    when "1"
+    when "View songs by Genre"
         sleep 2
         puts `clear`
         puts "Choose genre: "
@@ -133,7 +140,7 @@ def search_menu
         $student.view_songs_by_genre(input)
         sleep 2
         search_menu
-    when "2"
+    when "Your friend's favorite decade"
         sleep 2
         puts `clear`
         puts "Who's favorite decade would you like to view? :"
@@ -142,14 +149,14 @@ def search_menu
         input = gets.chomp
         Song.favorite_decade(input)
         search_menu
-    when "3"
+    when "Your friend's recommendations"
         sleep 2
         puts `clear`
         puts 'Enter student name: '
         name = gets.chomp
         Student.student_recommendations(name)
         search_menu
-    when "4"
+    when "Return to main menu"
         main_menu
     end
 
@@ -157,18 +164,17 @@ end
 
 def next_action
     sleep 2
-    puts <<~TEXT
-    Would you like to: 
-    1. Return to main menu
-    2. Exit
-    TEXT
-    input = gets.chomp
+    input = $prompt.select("What would you like to do? ") do |menu|
+        menu.choice 'Return to main menu'
+        menu.choice "Exit"
+    end
+
     case input 
-    when "1"
+    when "Return to main menu"
         sleep 2
         puts `clear`
         main_menu
-    when "2"
+    when "Exit"
         sleep 2
         puts 'Thank you for using our App!'
     end
