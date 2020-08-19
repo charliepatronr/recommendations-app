@@ -57,6 +57,7 @@ def menu
             else
             p 'You have no song recommendations!!!'
             end
+            
         when '4'
             my_songs = $student.songs 
             if my_songs.size >= 1
@@ -74,7 +75,7 @@ def menu
             puts 'Enter student name: '
             name = gets.chomp
 
-            p Student.student_recommendations(name)
+            Student.student_recommendations(name)
     end
 
 end
