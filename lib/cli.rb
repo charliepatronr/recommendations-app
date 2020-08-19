@@ -22,10 +22,12 @@ def menu
     "What would you like to do next?"
     1. Recommend a song
     2. View Songs in Playlist
-    3. Edit recommendation
-    4. Delete recommendation
-    5. View Recommendation by Student name
-    6. Exit
+    3. View Songs by Genre 
+    4. View your friend's favorite decade 
+    5. Edit recommendation
+    6. Delete recommendation
+    7. View Recommendation by Student name
+    8. Exit
     TEXT
 
     print "Enter your selection: "
@@ -47,11 +49,24 @@ def menu
         when '2'
             Song.playlist
             next_action
-
         when '3'
+            puts "Choose genre: "
+            Song.list_genres
+            input = gets.chomp
+            $student.view_songs_by_genre(input)
+            next_action
+
+        when '4'
+            puts "Who's favorite decade would you like to view? :"
+            # different message if student dont have any recommendations
+            Student.list_students
+            input = gets.chomp
+            Song.favorite_decade(input)
+            next_action
+        when '5'
             my_songs = $student.songs 
             if my_songs.size >= 1
-                p my_songs
+                $student.print_songs
                 puts 'Enter the name of the song you would like to edit: '
                 song = gets.chomp
                 puts 'Enter the artist of the song you would like to edit: '
@@ -60,12 +75,11 @@ def menu
             else
                 p 'You have no song recommendations!!!'
             end
-            
             next_action
-        when '4'
+        when '6'
             my_songs = $student.songs 
             if my_songs.size >= 1
-                p my_songs
+                $student.print_songs
                 puts 'Enter the name of the song you would like to delete: '
                 song = gets.chomp
                 puts 'Enter the artist of the song you would like to delete: '
@@ -75,14 +89,14 @@ def menu
                 p 'You have no song recommendations!!!'
             end
             next_action
-        when '5'
+        when '7'
             puts 'Enter student name: '
             name = gets.chomp
 
             Student.student_recommendations(name)
             p Student.student_recommendations(name)
             next_action
-        when "6"
+        when "8"
             puts 'Thank you for using our App!'
     end
 

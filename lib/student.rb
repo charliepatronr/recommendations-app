@@ -50,7 +50,7 @@ class Student < ActiveRecord::Base
             replace = gets.chomp
             Song.update(song_id, name: replace )
         end
-
+        p 'Your recommendation has been updated!'
     end
 
     def delete_recommendation(song_name, artist)
@@ -59,7 +59,7 @@ class Student < ActiveRecord::Base
         recommendation = Recommendation.find_by(song_id: song_id)
         song.destroy
         recommendation.destroy
-        p 'Your recommendation has been deleted'
+        p 'Your recommendation has been deleted!'
     end
 
     def self.student_recommendations(student_name)
@@ -83,6 +83,25 @@ class Student < ActiveRecord::Base
             puts "#{song.name} - #{song.artist}\n"
         end
     end
+
+
+    def self.list_students
+        students = Student.all.map do |student|
+            student.name
+        end
+        students.each do |student|
+            puts "#{student}"
+        end
+    end
+
+
+    def print_songs
+        self.songs.each do |song|
+            puts "#{song.name} - #{song.artist}\n"
+        end
+    end
+    # my_songs = $student.songs 
+
     ##need to list all genres first
     ##allow user to choose from list (using TTYprompt)
 

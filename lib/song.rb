@@ -29,8 +29,12 @@ class Song < ActiveRecord::Base
     }
     
     def self.playlist
-        Song.all.map do |song|
-        puts "#{song.name} - #{song.artist}\n"
+        arr = Song.all.map do |song|
+            "#{song.name} - #{song.artist}\n"
+        end
+        arr = arr.sort { |a, b| a <=> b }
+        arr.each do |song|
+            puts song
         end
     end
 
@@ -55,5 +59,15 @@ class Song < ActiveRecord::Base
         end
         puts "#{student_obj.name}'s favorite decade is #{favorite_decade}"
     end
+
+    def self.list_genres 
+        genres = Song.all.map do |song|
+            song.genre
+        end
+        genres.uniq.each do |genre|
+            puts "#{genre}"
+        end
+    end
+    
 
 end
