@@ -12,7 +12,10 @@ def login_or_signup
     username = gets.chomp
     $student = Student.find_or_create_by(name: username)
     p "Welcome #{$student.name}!"
+    #Add option when creating a new user to input favorite genre, age, etc.
 end
+
+    #Add view profile method
 
 def menu
     puts <<~TEXT
