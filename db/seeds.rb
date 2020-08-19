@@ -38,10 +38,31 @@ Student.create(
     favorite_genre: "Deathcore"
 )
 
-Student.create(
+jeff = Student.create(
     name: "Jeff",
     age: 34,
     favorite_genre: "Jazz"
+)
+
+jeff.songs << Song.create(
+    name: "My One and Only Love",
+    artist: "John Coltrane",
+    year: 1963,
+    genre: "Jazz"
+)
+
+jeff.songs << Song.create(
+    name: "You're Not Good Enough",
+    artist: "Blood Orange",
+    year: 2013,
+    genre: "Alternative"
+)
+
+jeff.songs << Song.create(
+    name: "Fool in the Rain",
+    artist: "Led Zeppelin",
+    year: 1979,
+    genre: "Progressive Rock"
 )
 
 Student.create(
@@ -200,26 +221,7 @@ Song.create(
     genre: "Hard Rock"
 )
 
-Song.create(
-    name: "My One and Only Love",
-    artist: "John Coltrane",
-    year: 1963,
-    genre: "Jazz"
-)
 
-Song.create(
-    name: "You're Not Good Enough",
-    artist: "Blood Orange",
-    year: 2013,
-    genre: "Alternative"
-)
-
-Song.create(
-    name: "Fool in the Rain",
-    artist: "Led Zeppelin",
-    year: 1979,
-    genre: "Progressive Rock"
-)
 
 Song.create(
     name: "Nocturne in C-sharp minor",
