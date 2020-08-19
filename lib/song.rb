@@ -6,6 +6,16 @@ class Song < ActiveRecord::Base
     
 
     DECADES = {
+        "1810's": 1810,
+        "1820's": 1820, 
+        "1830's": 1830, 
+        "1840's": 1840, 
+        "1850's": 1850, 
+        "1860's": 1860, 
+        "1870's": 1870, 
+        "1880's": 1880, 
+        "1890's": 1890, 
+        "10's": 1910,
         "20's": 1920, 
         "30's": 1930, 
         "40's": 1940, 
@@ -17,6 +27,7 @@ class Song < ActiveRecord::Base
         "2000's": 2000, 
         "2010's": 2010
     }
+    
     def self.playlist
         Song.all.map do |song|
         puts "#{song.name} - #{song.artist}\n"
