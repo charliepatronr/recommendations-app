@@ -43,6 +43,7 @@ class Song < ActiveRecord::Base
         song = Song.find_by(name: song_name)
         puts "#{song.name} by #{song.artist} was recommended by #{song.students.first.name}"
     end
+    #add to cli later 
 
     def self.favorite_decade(student)
         favorite_decade = ''

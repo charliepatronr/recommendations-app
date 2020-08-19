@@ -12,6 +12,7 @@ class Student < ActiveRecord::Base
         else 
             puts 'Hey song already exists! Enter a different song'
         end
+        p 'Thanks for your recommendation!'
     end
 
     def list_recommendations
