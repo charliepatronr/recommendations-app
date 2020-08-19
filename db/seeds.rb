@@ -438,11 +438,6 @@ Song.create(
     genre: "Electronic"
 )
 
-Recommendation.create(
-    student_id:
-    song_id:
-)
-
 10.times do
     Recommendation.create(
         student_id: Student.ids.sample,
