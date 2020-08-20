@@ -1,3 +1,21 @@
+require 'rest-client'
+require 'json'
+require 'pry'
+
+#Musix Match api url
+$base_url = "https://api.musixmatch.com/ws/1.1/"
+#API Key
+$api_key = "&apikey=6778947b4e2410f9a74542888456f8b4"
+
+#api method
+$lyrics_matcher = "matcher.lyrics.get"
+
+#format url
+$format_url = "?format=json&callback=callback"
+
+#Search parameters 
+$artist_search_parameter = "&q_artist="
+$track_search_parameter = "&q_track="
 
 
 class Song < ActiveRecord::Base
@@ -69,6 +87,23 @@ class Song < ActiveRecord::Base
             puts "#{genre}"
         end
     end
+
+    def self.search_lyrics
+        puts 'What is the song name?'
+        track_name = gets.chomp
+        puts 'What is the artist name?'
+        artist_name = gets.chomp
+        call = $base_url + $lyrics_matcher + $format_url + $track_search_parameter + track_name + $artist_search_parameter  + artist_name + $api_key
+        response = RestClient.get(call)
+        response_hash = JSON.parse(response.body)
+        if ( response_hash['message']['header']['status_code'] != 200 )
+            puts "We could not find your song..."
+        else 
+            puts lyrics = response_hash["message"]["body"]["lyrics"]["lyrics_body"]
+        end
+    end
     
 
 end
+
+
