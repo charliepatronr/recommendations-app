@@ -20,8 +20,6 @@ class Student < ActiveRecord::Base
         song = Song.find_by(name: name, artist: artist)
         song_id = song.id
 
-        #I used TTYprompt to redo this selection menu!
-
         input = $prompt.select("What would you like to update? ") do |menu|
             menu.choice 'Song name'
             menu.choice 'Artist'
@@ -97,6 +95,14 @@ class Student < ActiveRecord::Base
         students.each do |student|
             puts "#{student}"
         end
+    end
+
+    def rate_song(song_name, rate)
+        song = Song.find_by(name: song_name)
+        song_id = song.id
+        Rating.create(song_id: song_id, ratings: rate)
+        sleep 0.5
+        puts "Thanks for rating!"
     end
 
     def print_songs

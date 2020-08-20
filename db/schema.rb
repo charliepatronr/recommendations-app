@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_164240) do
+ActiveRecord::Schema.define(version: 2020_08_20_215351) do
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "song_id"
+    t.integer "ratings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "recommendations", force: :cascade do |t|
     t.integer "student_id"

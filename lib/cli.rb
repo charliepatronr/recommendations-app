@@ -6,11 +6,11 @@ $font = TTY::Font.new(:standard)
 
 def greeting
     puts $pastel.bright_red($font.write("Welcome to")) 
-    sleep 1
+    sleep 0.5
    puts $pastel.bright_magenta($font.write("Flatiron Chicago"))
-   sleep 1
+   sleep 0.5
    puts $pastel.yellow($font.write("08032020 Cohort's"))
-   sleep 1
+   sleep 0.5
    puts $pastel.bright_green($font.write("Playlist!!!"))
 end
 
@@ -54,7 +54,7 @@ def main_menu
     when "View playlist"
         sleep 2
         puts `clear`
-        Song.playlist
+        rating
         next_action
     when "Edit playlist"
         sleep 2
@@ -202,6 +202,40 @@ def user_profile
         sleep 2
         puts `clear`
         main_menu
+    end
+end
+
+def rating
+    Song.playlist
+    sleep 1
+    input = $prompt.select("Would you like to rate a song? ") do |menu|
+        menu.choice 'Yes'
+        menu.choice "No"
+    end
+    case input
+    when "Yes"
+    sleep 1
+    puts 'Enter the name of the song you would like to rate: '
+    name = gets.chomp
+    rate = $prompt.slider("Select your rating", max: 10, step: 1, default: 5)
+    $student.rate_song(name, rate)
+        sleep 1
+        input = $prompt.select("Would you like to view the average rating of this song? ") do |menu|
+            menu.choice 'Yes'
+            menu.choice "No"
+        end
+        case input
+        when "Yes"
+        sleep 1
+        puts "Average rating: "
+        Song.average_rating(name)
+        when "No"
+        sleep 1
+        main_menu
+        end
+    when "No"
+    sleep 1
+    main_menu
     end
 end
 

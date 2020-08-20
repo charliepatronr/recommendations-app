@@ -61,6 +61,19 @@ class Song < ActiveRecord::Base
         puts "#{student_obj.name}'s favorite decade is #{favorite_decade}"
     end
 
+    def Song.average_rating(song_name)
+        song = Song.find_by(name: song_name)
+        s_id = song.id
+        song_rating = Rating.all.select do |rate|
+            rate.song_id == s_id
+       end
+       sum = song_rating.map.sum do |s_instance|
+        s_instance.ratings.to_f
+       end
+       average = sum / song_rating.count
+       p average.round(2)
+    end
+
     def self.list_genres 
         genres = Song.all.map do |song|
             song.genre
@@ -69,6 +82,5 @@ class Song < ActiveRecord::Base
             puts "#{genre}"
         end
     end
-    
 
 end
