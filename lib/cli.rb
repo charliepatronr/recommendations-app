@@ -34,6 +34,7 @@ def main_menu
     sleep 2
     puts `clear`
     input = $prompt.select("What would you like to do? ") do |menu|
+        menu.choice 'View your profile'
         menu.choice 'View playlist'
         menu.choice 'Edit playlist'
         menu.choice 'Search'
@@ -41,6 +42,10 @@ def main_menu
     end
 
     case input 
+    when "View your profile"
+        sleep 2
+        puts `clear`
+        user_profile
     when "View playlist"
         sleep 2
         puts `clear`
@@ -160,6 +165,37 @@ def search_menu
         main_menu
     end
 
+end
+
+def user_profile
+    $student.view_profile($student.name)
+    input = $prompt.select("What would you like to do? ") do |menu|
+        menu.choice 'View your recommendations'
+        menu.choice 'Return to main menu'
+    end
+    case input 
+    when "View your recommendations"
+        sleep 2
+        puts `clear`
+        Student.student_recommendations($student.name)
+        sleep 2
+        input = $prompt.select("What would you like to do? ") do |menu|
+            menu.choice 'Go back to view profile'
+            menu.choice 'Return to main menu'
+        end
+        case input
+        when 'Go back to view profile'
+            sleep 2
+            puts `clear`
+            user_profile
+        when 'Return to main menu'
+            main_menu
+        end
+    when "Return to main menu"
+        sleep 2
+        puts `clear`
+        main_menu
+    end
 end
 
 def next_action
