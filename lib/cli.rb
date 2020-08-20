@@ -7,11 +7,11 @@ $font = TTY::Font.new(:standard)
 def greeting
     puts $pastel.bright_red($font.write("Welcome to")) 
     sleep 1
-   puts $pastel.bright_magenta($font.write("Flatiron Chicago"))
-   sleep 1
-   puts $pastel.yellow($font.write("08032020 Cohort's"))
-   sleep 1
-   puts $pastel.bright_green($font.write("Playlist!!!"))
+    puts $pastel.bright_magenta($font.write("Flatiron Chicago"))
+    sleep 1
+    puts $pastel.yellow($font.write("08032020 Cohort's"))
+    sleep 1
+    puts $pastel.bright_green($font.write("Playlist!!!"))
 end
 
 def login_or_signup
@@ -23,17 +23,6 @@ def login_or_signup
     #Add option when creating a new user to input favorite genre, age, etc.
 end
 
-    #Add view profile method
-
-    # prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
-# =>
-# Choose your destiny? (Use arrow keys, press Enter to select)
-# ‣ Scorpion
-#   Kano
-#   Jax
-
-# user_input = prompt.select("Select an action?", choices)
-# prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
 
 def main_menu
     sleep 2
@@ -134,8 +123,8 @@ end
 
 def search_menu
     sleep 2
-    puts `clear`
     input = $prompt.select("What would you like to do? ") do |menu|
+        menu.choice "Search for a song's lyrics"
         menu.choice 'View songs by Genre'
         menu.choice "Your friend's favorite decade"
         menu.choice "Your friend's recommendations"
@@ -143,6 +132,9 @@ def search_menu
     end
 
     case input 
+    when "Search for a song's lyrics"
+        Song.search_lyrics
+        search_menu
     when "View songs by Genre"
         sleep 2
         puts `clear`
