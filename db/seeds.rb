@@ -56,6 +56,12 @@ brian.songs << Song.create(
     genre: "Popular"
 )
 
+charlie = Student.create(
+    name: "Charlie",
+    age: 24,
+    favorite_genre: "Industrial"
+)
+
 hector = Student.create(
     name: "Hector",
     age: Faker::Number.within(range: 21..50),
@@ -81,12 +87,6 @@ hector.songs << Song.create(
     artist: "alt-J",
     year: 2012,
     genre: "Alternative"
-)
-
-charlie = Student.create(
-    name: "Charlie",
-    age: 25,
-    favorite_genre: "Industrial"
 )
 
 ian = Student.create(
