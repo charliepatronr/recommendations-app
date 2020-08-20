@@ -1,3 +1,4 @@
+$prompt = TTY::Prompt.new
 
 
 class Student < ActiveRecord::Base
@@ -15,38 +16,33 @@ class Student < ActiveRecord::Base
         p 'Thanks for your recommendation!'
     end
 
-    def list_recommendations
-        self.songs
-        # after delete_recommendation method is called both song and recommendations are deleted
-        #but recommendation still appears on this method
-    end
-
     def edit_recommendation(name, artist)
         song = Song.find_by(name: name, artist: artist)
         song_id = song.id
-        puts <<~TEXT
-        "What would you like to update? "
-        "1. Song name"
-        "2. Artist name"
-        "3. Genre"
-        "4. Year"
-        TEXT
-        input = gets.chomp
+
+        #I used TTYprompt to redo this selection menu!
+
+        input = $prompt.select("What would you like to update? ") do |menu|
+            menu.choice 'Song name'
+            menu.choice 'Artist'
+            menu.choice 'Genre'
+            menu.choice 'Year'
+        end
 
         case input 
-        when '1'
+        when 'Song name'
             puts "Enter new song name"
             replace = gets.chomp
             Song.update(song_id, name: replace )
-        when '2'
+        when 'Artist'
             puts "Enter new song artist"
             replace = gets.chomp
             Song.update(song_id, name: replace )
-        when '3'
+        when 'Genre'
             puts "Enter new genre"
             replace = gets.chomp
             Song.update(song_id, name: replace )
-        when '4'
+        when 'Year'
             puts "Enter new year"
             replace = gets.chomp
             Song.update(song_id, name: replace )
@@ -85,6 +81,14 @@ class Student < ActiveRecord::Base
         end
     end
 
+    def view_profile(name)
+       array = Student.all.select do |student|
+            student.name == name
+       end
+       array.each do |student|
+            puts "Name: #{student.name}\nAge: #{student.age}\nFavorite genre: #{student.favorite_genre}"
+       end
+    end
 
     def self.list_students
         students = Student.all.map do |student|
@@ -95,16 +99,12 @@ class Student < ActiveRecord::Base
         end
     end
 
-
     def print_songs
         self.songs.each do |song|
             puts "#{song.name} - #{song.artist}\n"
         end
     end
     # my_songs = $student.songs 
-
-    ##need to list all genres first
-    ##allow user to choose from list (using TTYprompt)
 
     # STUDENT.SONGS shows songs 
     # RECOMMENDATION.SONG shows individual song related to that recommendation

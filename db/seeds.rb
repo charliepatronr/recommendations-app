@@ -317,6 +317,27 @@ michelle = Student.create(
     favorite_genre: "EDM"
 )
 
+michelle.songs << Song.create(
+    name: "Hard To Explain",
+    artist: "The Strokes",
+    year: 2001,
+    genre: "Indie Rock"
+)
+
+michelle.songs << Song.create(
+    name: "Arcade Fire",
+    artist: "Haiti",
+    year: 2004,
+    genre: "Alternative"
+)
+
+michelle.songs << Song.create(
+    name: "Michelle",
+    artist: "The Beatles",
+    year: 1965,
+    genre: "Rock"
+)
+
 natalia = Student.create(
     name: "Natalia",
     age: Faker::Number.within(range: 21..50),
@@ -348,6 +369,27 @@ nick = Student.create(
     name: "Nick",
     age: 35,
     favorite_genre: "Funk"
+)
+
+nick.songs << Song.create(
+    name: "The Trapeze Swinger",
+    artist: "Iron and Wine",
+    year: 2005,
+    genre: "Folk"
+)
+
+nick.songs << Song.create(
+    name: "Love is All",
+    artist: "The Tallest Man on Earth",
+    year: 2017,
+    genre: "Alternative"
+)
+
+nick.songs << Song.create(
+    name: "Books",
+    artist: "Caamp",
+    year: 2018,
+    genre: "Folk"
 )
 
 percy = Student.create(
