@@ -24,7 +24,7 @@ User will be able to:
 - View user profile (read)
 - View recommendations made by user (read)
 - View all songs in playlist (read)
-- Rate a song (create)
+- Rate a song (create/read/update)
 - View average rating of song (read)
 - Edit songs in playlist (update)
 - Delete songs in playlist (delete)
