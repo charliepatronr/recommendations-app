@@ -1,12 +1,17 @@
 require_relative '../config/environment'
 ActiveRecord::Base.logger = nil
 $prompt = TTY::Prompt.new
-
-
-# Student.login("JoAnna Park")
+$pastel = Pastel.new
+$font = TTY::Font.new(:standard)
 
 def greeting
-    puts "Welcome to Flatiron Chicago 08032020 Cohort's Playlist!"
+    puts $pastel.bright_red($font.write("Welcome to")) 
+    sleep 1
+   puts $pastel.bright_magenta($font.write("Flatiron Chicago"))
+   sleep 1
+   puts $pastel.yellow($font.write("08032020 Cohort's"))
+   sleep 1
+   puts $pastel.bright_green($font.write("Playlist!!!"))
 end
 
 def login_or_signup
@@ -60,7 +65,9 @@ def main_menu
         puts `clear`
         search_menu
     when "Exit"
-        puts 'Thank you for using our App!'
+        sleep 1
+        puts $pastel.bright_cyan($font.write("Thank you for"))
+        puts $pastel.bright_blue($font.write("using our app!"))
     end 
 end
 
@@ -211,8 +218,9 @@ def next_action
         puts `clear`
         main_menu
     when "Exit"
-        sleep 2
-        puts 'Thank you for using our App!'
+        sleep 1
+        puts $pastel.bright_cyan($font.write("Thank you for"))
+        puts $pastel.bright_blue($font.write("using our app!"))
     end
 end
 
