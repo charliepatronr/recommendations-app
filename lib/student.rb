@@ -37,15 +37,15 @@ class Student < ActiveRecord::Base
         when 'Artist'
             puts "Enter new song artist"
             replace = gets.chomp
-            Song.update(song_id, name: replace )
+            Song.update(song_id, artist: replace )
         when 'Genre'
             puts "Enter new genre"
             replace = gets.chomp
-            Song.update(song_id, name: replace )
+            Song.update(song_id, genre: replace )
         when 'Year'
             puts "Enter new year"
             replace = gets.chomp
-            Song.update(song_id, name: replace )
+            Song.update(song_id, year: replace )
         end
         p 'Your recommendation has been updated!'
     end
@@ -64,12 +64,16 @@ class Student < ActiveRecord::Base
             songs_ids = target.recommendations.map do |recommend|
             recommend.song_id
         end 
-        songs_array = songs_ids.map do |id|
-            Song.find(id)
-        end
-        songs_array.each do |song|
-            puts "#{song.name} - #{song.artist}\n"
-        end
+        if songs_ids.size >=1
+            songs_array = songs_ids.map do |id|
+                Song.find(id)
+            end
+            songs_array.each do |song|
+                puts "#{song.name} - #{song.artist}\n"
+            end
+        else
+            puts "Sorry #{student_name} doesn't have any recommendations yet..."
+        end 
     end
 
     def view_songs_by_genre(song_genre)
