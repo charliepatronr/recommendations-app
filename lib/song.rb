@@ -89,6 +89,19 @@ class Song < ActiveRecord::Base
         end
     end
 
+    def Song.average_rating(song_name)
+        song = Song.find_by(name: song_name)
+        s_id = song.id
+        song_rating = Rating.all.select do |rate|
+            rate.song_id == s_id
+       end
+       sum = song_rating.map.sum do |s_instance|
+        s_instance.ratings.to_f
+       end
+       average = sum / song_rating.count
+       p average.round(2)
+    end
+
     def self.list_genres 
         genres = Song.all.map do |song|
             song.genre
@@ -97,6 +110,8 @@ class Song < ActiveRecord::Base
             puts "#{genre}"
         end
     end
+<<<<<<< HEAD
+=======
 
     def self.search_lyrics
         puts 'What is the song name?'
@@ -113,6 +128,7 @@ class Song < ActiveRecord::Base
         end
     end
     
+>>>>>>> 2d18de9bc943799848481c8f9113247acdd8651f
 
 end
 
