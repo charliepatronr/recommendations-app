@@ -5,6 +5,8 @@ $pastel = Pastel.new
 $font = TTY::Font.new(:standard)
 
 def greeting
+    player = RubyAfplay::Player.new("/Users/jpark/Flatiron/saturday-jam.mp3", volume: 0.2, time: 5.8, rate: 1.5)
+    player.play
     puts `clear`
     puts $pastel.bright_red($font.write("Welcome to")) 
     sleep 0.5
@@ -57,6 +59,8 @@ def main_menu
     when "Exit"
         sleep 1
         puts `clear`
+        player = RubyAfplay::Player.new("/Users/jpark/Flatiron/saturday-jam.mp3", volume: 0.2, time: 5.8, rate: 1.5)
+        player.play
         puts $pastel.bright_cyan($font.write("Thank you for"))
         puts $pastel.bright_blue($font.write("using our app!"))
     end 
@@ -259,6 +263,8 @@ def next_action
     when "Exit"
         sleep 1
         puts `clear`
+        player = RubyAfplay::Player.new("/Users/jpark/Flatiron/saturday-jam.mp3", volume: 0.2, time: 5.8, rate: 1.5)
+        player.play
         puts $pastel.bright_cyan($font.write("Thank you for"))
         puts $pastel.bright_blue($font.write("using our app!"))
     end
