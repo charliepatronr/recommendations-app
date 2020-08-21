@@ -6,12 +6,21 @@ $font = TTY::Font.new(:standard)
 
 def greeting
     puts $pastel.bright_red($font.write("Welcome to")) 
+<<<<<<< HEAD
     sleep 0.5
    puts $pastel.bright_magenta($font.write("Flatiron Chicago"))
    sleep 0.5
    puts $pastel.yellow($font.write("08032020 Cohort's"))
    sleep 0.5
    puts $pastel.bright_green($font.write("Playlist!!!"))
+=======
+    sleep 1
+    puts $pastel.bright_magenta($font.write("Flatiron Chicago"))
+    sleep 1
+    puts $pastel.yellow($font.write("08032020 Cohort's"))
+    sleep 1
+    puts $pastel.bright_green($font.write("Playlist!!!"))
+>>>>>>> 2d18de9bc943799848481c8f9113247acdd8651f
 end
 
 def login_or_signup
