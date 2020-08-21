@@ -77,7 +77,7 @@ hector.songs << Song.create(
 
 hector.songs << Song.create(
     name: "Nights",
-    artist: "Franklin Ocean",
+    artist: "Frank Ocean",
     year: 2016,
     genre: "Popular"
 )

@@ -5,6 +5,7 @@ $pastel = Pastel.new
 $font = TTY::Font.new(:standard)
 
 def greeting
+    puts `clear`
     puts $pastel.bright_red($font.write("Welcome to")) 
     sleep 0.5
    puts $pastel.bright_magenta($font.write("Flatiron Chicago"))
@@ -15,7 +16,7 @@ def greeting
 end
 
 def login_or_signup
-    puts "Please log in with your username or enter new username to create an account: "
+    puts "Log in with first name or enter your first name to create an account: "
     username = gets.chomp
     $student = Student.find_or_create_by(name: username)
     puts `clear`
@@ -27,8 +28,8 @@ end
 def main_menu
     sleep 2
     puts `clear`
-    input = $prompt.select("What would you like to do? ") do |menu|
-        menu.choice 'View your profile'
+    input = $prompt.select("What would you like to do, #{$student.name}? ") do |menu|
+        menu.choice 'My profile'
         menu.choice 'View playlist'
         menu.choice 'Edit playlist'
         menu.choice 'Search'
@@ -36,7 +37,7 @@ def main_menu
     end
 
     case input 
-    when "View your profile"
+    when "My profile"
         sleep 2
         puts `clear`
         user_profile
@@ -55,6 +56,7 @@ def main_menu
         search_menu
     when "Exit"
         sleep 1
+        puts `clear`
         puts $pastel.bright_cyan($font.write("Thank you for"))
         puts $pastel.bright_blue($font.write("using our app!"))
     end 
@@ -63,27 +65,27 @@ end
 def edit_menu
     sleep 1
     input = $prompt.select("") do |menu|
-        menu.choice 'Add a song to playlist'
-        menu.choice 'Edit your songs'
-        menu.choice 'Delete your songs'
-        menu.choice 'Return to main menu'
+        menu.choice 'Add song to playlist'
+        menu.choice 'Edit song'
+        menu.choice 'Delete song'
+        menu.choice 'Main menu'
     end
     
     case input 
-    when "Add a song to playlist"
+    when "Add song to playlist"
         sleep 2
         puts `clear`
         puts 'Enter the name of the song you would like to recommend: '
         name = gets.chomp
-        puts 'Enter the artist of the song you would like to recommend: '
+        puts 'Enter the artist: '
         artist = gets.chomp
-        puts 'Enter the genre of the song you would like to recommend: '
+        puts 'Enter the genre: '
         genre = gets.chomp
-        puts 'Enter the year of the song you would like to recommend: '
+        puts 'Enter release year: '
         year = gets.chomp.to_i
         $student.recommend_song(name, artist, genre, year)
         edit_menu
-    when "Edit your songs"
+    when "Edit song"
         sleep 2
         puts `clear`
         my_songs = $student.songs 
@@ -91,14 +93,14 @@ def edit_menu
             $student.print_songs
             puts 'Enter the name of the song you would like to edit: '
             song = gets.chomp
-            puts 'Enter the artist of the song you would like to edit: '
+            puts 'Enter the artist: '
             artist = gets.chomp
             $student.edit_recommendation(song, artist)
         else
             p 'You have no song recommendations!!!'
         end
         edit_menu
-    when "Delete your songs"
+    when "Delete song"
         puts `clear`
         sleep 2
         my_songs = $student.songs 
@@ -106,7 +108,7 @@ def edit_menu
             $student.print_songs
             puts 'Enter the name of the song you would like to delete: '
             song = gets.chomp
-            puts 'Enter the artist of the song you would like to delete: '
+            puts 'Enter the artist: '
             artist = gets.chomp
             $student.delete_recommendation(song, artist)
         else
@@ -114,7 +116,7 @@ def edit_menu
         end
         edit_menu
 
-    when "Return to main menu"
+    when "Main menu"
         main_menu
     end
 
@@ -123,49 +125,55 @@ end
 def search_menu
     sleep 1
     input = $prompt.select("") do |menu|
-        menu.choice "Search for a song's lyrics"
+        menu.choice "Search for song lyrics"
         menu.choice 'Who recommended this song?'
         menu.choice 'View songs by Genre'
-        menu.choice "Your friend's favorite decade"
+        menu.choice "What's your friend's favorite decade?"
         menu.choice "Your friend's recommendations"
-        menu.choice 'Return to main menu'
+        menu.choice 'Main menu'
     end
 
     case input 
-    when "Search for a song's lyrics"
+    when "Search for song lyrics"
+        sleep 1.5
+        puts `clear`
         Song.search_lyrics
         search_menu
     when 'Who recommended this song?'
         sleep 2 
         puts `clear`
         Song.song_viewer
+        sleep 2
         search_menu
     when "View songs by Genre"
         sleep 2
         puts `clear`
-        puts "Choose genre: "
         Song.list_genres
+        puts "Choose genre: "
         input = gets.chomp
         $student.view_songs_by_genre(input)
         sleep 2
         search_menu
-    when "Your friend's favorite decade"
+    when "What's your friend's favorite decade?"
         sleep 2
         puts `clear`
         Student.list_students
-        puts "Who's favorite decade would you like to view? :"
+        puts "Who's favorite decade would you like to view?"
         input = gets.chomp
+        puts `clear`
         Song.favorite_decade(input)
         search_menu
     when "Your friend's recommendations"
         sleep 2
         puts `clear`
         Student.list_students
-        puts "Who's recommendations would you like to see ?"
+        puts "Who's recommendations would you like to see?"
         name = gets.chomp
+        puts `clear`
         Student.student_recommendations(name)
+        sleep 1.5
         search_menu
-    when "Return to main menu"
+    when "Main menu"
         main_menu
     end
 
@@ -238,7 +246,7 @@ end
 
 def next_action
     sleep 2
-    input = $prompt.select("What would you like to do? ") do |menu|
+    input = $prompt.select("What would you like to do, #{$student.name}? ") do |menu|
         menu.choice 'Return to main menu'
         menu.choice "Exit"
     end
@@ -250,6 +258,7 @@ def next_action
         main_menu
     when "Exit"
         sleep 1
+        puts `clear`
         puts $pastel.bright_cyan($font.write("Thank you for"))
         puts $pastel.bright_blue($font.write("using our app!"))
     end
