@@ -110,8 +110,6 @@ class Song < ActiveRecord::Base
             puts "#{genre}"
         end
     end
-<<<<<<< HEAD
-=======
 
     def self.search_lyrics
         puts 'What is the song name?'
@@ -128,7 +126,6 @@ class Song < ActiveRecord::Base
         end
     end
     
->>>>>>> 2d18de9bc943799848481c8f9113247acdd8651f
 
 end
 
