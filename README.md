@@ -8,8 +8,10 @@ Flatiron Chicago 08023030 Cohort's Playlist is a CLI application used to view a 
 2. git clone https://github.com/charliepatronr/recommendations-app.git
 3. cd recommendations-app
 4. bundle install
-5. type ruby bin/run.rb
-6. use app
+5. Run rake db:migrate
+6. Run rake db:seed
+7. type ruby bin/run.rb
+8. use app
 
 
 ## Domain Model
