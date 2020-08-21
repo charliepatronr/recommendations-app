@@ -23,17 +23,6 @@ def login_or_signup
     #Add option when creating a new user to input favorite genre, age, etc.
 end
 
-    #Add view profile method
-
-    # prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
-# =>
-# Choose your destiny? (Use arrow keys, press Enter to select)
-# ‣ Scorpion
-#   Kano
-#   Jax
-
-# user_input = prompt.select("Select an action?", choices)
-# prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
 
 def main_menu
     sleep 2
@@ -72,9 +61,8 @@ def main_menu
 end
 
 def edit_menu
-    sleep 2
-    puts `clear`
-    input = $prompt.select("What would you like to do? ") do |menu|
+    sleep 1
+    input = $prompt.select("") do |menu|
         menu.choice 'Add a song to playlist'
         menu.choice 'Edit your songs'
         menu.choice 'Delete your songs'
@@ -133,9 +121,10 @@ def edit_menu
 end
 
 def search_menu
-    sleep 2
-    puts `clear`
-    input = $prompt.select("What would you like to do? ") do |menu|
+    sleep 1
+    input = $prompt.select("") do |menu|
+        menu.choice "Search for a song's lyrics"
+        menu.choice 'Who recommended this song?'
         menu.choice 'View songs by Genre'
         menu.choice "Your friend's favorite decade"
         menu.choice "Your friend's recommendations"
@@ -143,6 +132,14 @@ def search_menu
     end
 
     case input 
+    when "Search for a song's lyrics"
+        Song.search_lyrics
+        search_menu
+    when 'Who recommended this song?'
+        sleep 2 
+        puts `clear`
+        Song.song_viewer
+        search_menu
     when "View songs by Genre"
         sleep 2
         puts `clear`
@@ -155,16 +152,16 @@ def search_menu
     when "Your friend's favorite decade"
         sleep 2
         puts `clear`
-        puts "Who's favorite decade would you like to view? :"
-        # different message if student dont have any recommendations
         Student.list_students
+        puts "Who's favorite decade would you like to view? :"
         input = gets.chomp
         Song.favorite_decade(input)
         search_menu
     when "Your friend's recommendations"
         sleep 2
         puts `clear`
-        puts 'Enter student name: '
+        Student.list_students
+        puts "Who's recommendations would you like to see ?"
         name = gets.chomp
         Student.student_recommendations(name)
         search_menu
@@ -176,7 +173,7 @@ end
 
 def user_profile
     $student.view_profile($student.name)
-    input = $prompt.select("What would you like to do? ") do |menu|
+    input = $prompt.select("") do |menu|
         menu.choice 'View your recommendations'
         menu.choice 'Return to main menu'
     end
@@ -258,4 +255,5 @@ def next_action
     end
 end
 
-
+#creaters: Charlie Patron and JoAnna Park
+#Flatiron Mod-1 Ruby Project

@@ -10,3 +10,5 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'tty-prompt'
 gem 'tty-font'
 gem 'rake'
+gem 'rest-client', '~> 2.1'
+gem 'json', '~> 2.3', '>= 2.3.1'
